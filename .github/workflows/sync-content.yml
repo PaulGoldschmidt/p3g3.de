@@ -1,0 +1,27 @@
+name: Sync Content to Staging
+
+on:
+  schedule:
+    - cron: '15 4 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Ghost Admin API client
+        run: npm install --no-save @tryghost/admin-api
+
+      - name: Sync production content to staging
+        run: node .github/scripts/sync-content.js
+        env:
+          PROD_GHOST_URL: ${{ secrets.PROD_GHOST_ADMIN_API_URL }}
+          PROD_GHOST_KEY: ${{ secrets.PROD_GHOST_ADMIN_API_KEY }}
+          STAGING_GHOST_URL: ${{ secrets.STAGING_GHOST_ADMIN_API_URL }}
+          STAGING_GHOST_KEY: ${{ secrets.STAGING_GHOST_ADMIN_API_KEY }}
