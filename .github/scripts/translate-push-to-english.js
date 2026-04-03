@@ -48,6 +48,52 @@ function walkLexical(node, callback) {
     }
 }
 
+// --- Mobiledoc tree walking ---
+// Mobiledoc sections: [1, tag, markers] = markup, [3, tag, items] = list, [10, cardIdx] = card
+// Markers: [0, openMarkups, closeCount, text] = text marker, [1, ...] = atom marker
+
+function walkMobiledocMarkers(markers, callback) {
+    for (const marker of markers) {
+        if (marker[0] === 0 && typeof marker[3] === 'string' && marker[3].trim()) {
+            callback(marker, 3);
+        }
+    }
+}
+
+function walkMobiledocCard(payload, callback) {
+    if (!payload || typeof payload !== 'object') return;
+    if (typeof payload.alt === 'string' && payload.alt.trim()) {
+        callback(payload, 'alt');
+    }
+    if (typeof payload.caption === 'string' && payload.caption.trim()) {
+        callback(payload, 'caption');
+    }
+}
+
+function walkMobiledoc(mobiledoc, callback) {
+    const { sections, cards } = mobiledoc;
+    if (!Array.isArray(sections)) return;
+
+    for (const section of sections) {
+        const type = section[0];
+        if (type === 1) {
+            // Markup section: [1, tagName, markers]
+            walkMobiledocMarkers(section[2] || [], callback);
+        } else if (type === 3) {
+            // List section: [3, tagName, items], each item is an array of markers
+            for (const item of section[2] || []) {
+                walkMobiledocMarkers(item, callback);
+            }
+        } else if (type === 10) {
+            // Card section: [10, cardIndex]
+            const card = cards && cards[section[1]];
+            if (card) {
+                walkMobiledocCard(card[1], callback);
+            }
+        }
+    }
+}
+
 function collectTranslatableStrings(post) {
     const texts = [];
 
@@ -69,8 +115,13 @@ function collectTranslatableStrings(post) {
 
     if (post.lexical) {
         const lexical = JSON.parse(post.lexical);
-        walkLexical(lexical.root, (node, field) => {
-            texts.push(node[field]);
+        walkLexical(lexical.root, (obj, key) => {
+            texts.push(obj[key]);
+        });
+    } else if (post.mobiledoc) {
+        const mobiledoc = JSON.parse(post.mobiledoc);
+        walkMobiledoc(mobiledoc, (obj, key) => {
+            texts.push(obj[key]);
         });
     }
 
@@ -98,10 +149,16 @@ function applyTranslations(post, translations) {
 
     if (post.lexical) {
         const lexical = JSON.parse(post.lexical);
-        walkLexical(lexical.root, (node, field) => {
-            node[field] = translations[idx++];
+        walkLexical(lexical.root, (obj, key) => {
+            obj[key] = translations[idx++];
         });
         post.lexical = JSON.stringify(lexical);
+    } else if (post.mobiledoc) {
+        const mobiledoc = JSON.parse(post.mobiledoc);
+        walkMobiledoc(mobiledoc, (obj, key) => {
+            obj[key] = translations[idx++];
+        });
+        post.mobiledoc = JSON.stringify(mobiledoc);
     }
 
     if (idx !== translations.length) {
@@ -181,7 +238,7 @@ async function main() {
     const englishSlugs = await fetchEnglishSlugs();
     console.log(`Found ${englishSlugs.size} existing posts on English instance\n`);
 
-    const stats = { created: 0, skipped: 0, skippedMobiledoc: 0, translationErrors: 0, pushErrors: 0 };
+    const stats = { created: 0, skipped: 0, translationErrors: 0, pushErrors: 0 };
 
     for (const post of prodPosts) {
         if (englishSlugs.has(post.slug)) {
@@ -190,14 +247,9 @@ async function main() {
             continue;
         }
 
-        if (!post.lexical) {
-            if (post.mobiledoc) {
-                console.warn(`  WARN: "${post.title}" (${post.slug}) uses mobiledoc — skipping`);
-                stats.skippedMobiledoc++;
-            } else {
-                console.warn(`  WARN: "${post.title}" (${post.slug}) has no content — skipping`);
-                stats.pushErrors++;
-            }
+        if (!post.lexical && !post.mobiledoc) {
+            console.warn(`  WARN: "${post.title}" (${post.slug}) has no content — skipping`);
+            stats.pushErrors++;
             continue;
         }
 
@@ -234,7 +286,6 @@ async function main() {
             title: translatedPost.title,
             slug: translatedPost.slug,
             status: translatedPost.status,
-            lexical: translatedPost.lexical,
             feature_image: translatedPost.feature_image,
             feature_image_alt: translatedPost.feature_image_alt,
             feature_image_caption: translatedPost.feature_image_caption,
@@ -252,6 +303,12 @@ async function main() {
             tags: translatedPost.tags.map((name) => ({ name })),
         };
 
+        if (translatedPost.lexical) {
+            postData.lexical = translatedPost.lexical;
+        } else if (translatedPost.mobiledoc) {
+            postData.mobiledoc = translatedPost.mobiledoc;
+        }
+
         try {
             await ghost.posts.add(postData);
             console.log(`  CREATE: "${translatedPost.title}" (${translatedPost.slug})`);
@@ -265,11 +322,10 @@ async function main() {
     }
 
     console.log('\nTranslation sync complete.');
-    console.log(`  Created:             ${stats.created}`);
-    console.log(`  Skipped (existing):  ${stats.skipped}`);
-    console.log(`  Skipped (mobiledoc): ${stats.skippedMobiledoc}`);
-    console.log(`  Translation errors:  ${stats.translationErrors}`);
-    console.log(`  Push errors:         ${stats.pushErrors}`);
+    console.log(`  Created:            ${stats.created}`);
+    console.log(`  Skipped (existing): ${stats.skipped}`);
+    console.log(`  Translation errors: ${stats.translationErrors}`);
+    console.log(`  Push errors:        ${stats.pushErrors}`);
 
     if (stats.translationErrors > 0 || stats.pushErrors > 0) process.exit(1);
 }
