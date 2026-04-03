@@ -6,9 +6,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    with:
-      environment: staging
-    secrets: inherit
+    environment: staging
     steps:
       - uses: actions/checkout@v4
       - name: Deploy Ghost Theme
