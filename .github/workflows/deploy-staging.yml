@@ -16,30 +16,3 @@ jobs:
         with:
           api-url: ${{ secrets.GHOST_ADMIN_API_URL }}
           api-key: ${{ secrets.GHOST_ADMIN_API_KEY }}
-      - name: Upload Redirects
-        env:
-          GHOST_ADMIN_API_URL: ${{ secrets.GHOST_ADMIN_API_URL }}
-          GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_REDIRECTS_API_KEY }}
-        run: |
-          TOKEN=$(node -e "
-            const crypto = require('crypto');
-            const [id, secret] = process.env.GHOST_ADMIN_API_KEY.split(':');
-            const header = Buffer.from(JSON.stringify({alg:'HS256',typ:'JWT',kid:id})).toString('base64url');
-            const now = Math.floor(Date.now()/1000);
-            const payload = Buffer.from(JSON.stringify({iat:now,exp:now+300,aud:'/admin/'})).toString('base64url');
-            const sig = crypto.createHmac('sha256',Buffer.from(secret,'hex')).update(header+'.'+payload).digest('base64url');
-            console.log(header+'.'+payload+'.'+sig);
-          ")
-          echo "--- Testing token against /site/ endpoint ---"
-          curl -s -w "\nHTTP Status: %{http_code}\n" \
-            -H "Authorization: Ghost ${TOKEN}" \
-            "${GHOST_ADMIN_API_URL}/ghost/api/admin/site/"
-          echo ""
-          echo "--- Uploading redirects.json ---"
-          echo "File contents:"
-          cat redirects.json
-          echo ""
-          curl -v -X POST "${GHOST_ADMIN_API_URL}/ghost/api/admin/redirects/upload/" \
-            -H "Authorization: Ghost ${TOKEN}" \
-            -F "file=@redirects.json;type=application/json" \
-            2>&1 | grep -v "Authorization:"
