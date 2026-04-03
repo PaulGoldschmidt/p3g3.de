@@ -18,6 +18,10 @@ const api = new GhostAdminAPI({
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+function setOutput(name, value) {
+    fs.appendFileSync(process.env.GITHUB_OUTPUT, `${name}=${value}\n`);
+}
+
 async function main() {
     console.log('Fetching all posts from production...\n');
 
@@ -42,6 +46,35 @@ async function main() {
 
     console.log(`Fetched ${allPosts.length} posts from production`);
 
+    // Compare current slugs against cached slugs from last run
+    const currentSlugs = allPosts.map((p) => p.slug).sort();
+    const currentSlugsJson = JSON.stringify(currentSlugs);
+
+    let hasNewPosts = true;
+    const cacheFile = 'cached-production-slugs.json';
+
+    if (fs.existsSync(cacheFile)) {
+        const cachedSlugsJson = fs.readFileSync(cacheFile, 'utf-8');
+        if (cachedSlugsJson === currentSlugsJson) {
+            console.log('\nNo new posts since last run — skipping sync.');
+            hasNewPosts = false;
+        } else {
+            const cachedSlugs = new Set(JSON.parse(cachedSlugsJson));
+            const newSlugs = currentSlugs.filter((s) => !cachedSlugs.has(s));
+            console.log(`\nNew posts detected: ${newSlugs.join(', ')}`);
+        }
+    } else {
+        console.log('\nNo cache found — first run, will sync all posts.');
+    }
+
+    // Always update the cache with current slugs
+    fs.writeFileSync(cacheFile, currentSlugsJson);
+
+    setOutput('has_new_posts', hasNewPosts ? 'true' : 'false');
+
+    if (!hasNewPosts) return;
+
+    // Write full post data for the push-to-staging job
     const posts = allPosts.map((post) => ({
         title: post.title,
         slug: post.slug,

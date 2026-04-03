@@ -9,6 +9,8 @@ jobs:
   fetch-production:
     runs-on: ubuntu-latest
     environment: production
+    outputs:
+      has_new_posts: ${{ steps.fetch.outputs.has_new_posts }}
     steps:
       - uses: actions/checkout@v4
 
@@ -19,13 +21,21 @@ jobs:
       - name: Install Ghost Admin API client
         run: npm install --no-save @tryghost/admin-api
 
+      - name: Restore slug cache
+        uses: actions/cache@v4
+        with:
+          path: cached-production-slugs.json
+          key: production-slugs
+
       - name: Fetch posts from production
+        id: fetch
         run: node .github/scripts/fetch-production-posts.js
         env:
           GHOST_ADMIN_API_URL: ${{ secrets.GHOST_ADMIN_API_URL }}
           GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_API_KEY }}
 
       - name: Upload production posts
+        if: steps.fetch.outputs.has_new_posts == 'true'
         uses: actions/upload-artifact@v4
         with:
           name: production-posts
@@ -34,6 +44,7 @@ jobs:
 
   push-to-staging:
     needs: fetch-production
+    if: needs.fetch-production.outputs.has_new_posts == 'true'
     runs-on: ubuntu-latest
     environment: staging
     steps:
