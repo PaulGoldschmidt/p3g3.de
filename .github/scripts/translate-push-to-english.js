@@ -21,6 +21,11 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+function slugify(text) {
+    return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+}
+
+const SOURCE_TAG_PREFIX = '#source:';
 const SKIP_NODE_TYPES = new Set(['codeblock', 'code']);
 const TEXT_NODE_TYPES = new Set(['text', 'extended-text']);
 
@@ -109,6 +114,9 @@ function collectTranslatableStrings(post) {
         }
     }
 
+    // Slug (translated separately, slugified after)
+    texts.push(post.slug);
+
     for (const tag of post.tags) {
         texts.push(tag);
     }
@@ -142,6 +150,9 @@ function applyTranslations(post, translations) {
             post[field] = translations[idx++];
         }
     }
+
+    // Slug — slugify the translated result
+    post.slug = slugify(translations[idx++]);
 
     for (let i = 0; i < post.tags.length; i++) {
         post.tags[i] = translations[idx++];
@@ -205,8 +216,8 @@ async function translateStrings(texts, postTitle) {
 
 // --- Ghost API ---
 
-async function fetchEnglishSlugs() {
-    const slugs = new Set();
+async function fetchSyncedSlugs() {
+    const syncedSlugs = new Set();
     let page = 1;
 
     while (true) {
@@ -214,11 +225,16 @@ async function fetchEnglishSlugs() {
             limit: 15,
             page,
             filter: 'status:[published,draft]',
-            fields: 'slug',
+            include: 'tags',
         });
 
         for (const post of result) {
-            slugs.add(post.slug);
+            if (!post.tags) continue;
+            for (const tag of post.tags) {
+                if (tag.name.startsWith(SOURCE_TAG_PREFIX)) {
+                    syncedSlugs.add(tag.name.slice(SOURCE_TAG_PREFIX.length));
+                }
+            }
         }
 
         if (!result.meta.pagination.next) break;
@@ -226,7 +242,7 @@ async function fetchEnglishSlugs() {
         await sleep(50);
     }
 
-    return slugs;
+    return syncedSlugs;
 }
 
 // --- Main ---
@@ -235,13 +251,13 @@ async function main() {
     const prodPosts = JSON.parse(fs.readFileSync('production-posts.json', 'utf-8'));
     console.log(`Loaded ${prodPosts.length} production posts\n`);
 
-    const englishSlugs = await fetchEnglishSlugs();
-    console.log(`Found ${englishSlugs.size} existing posts on English instance\n`);
+    const syncedSlugs = await fetchSyncedSlugs();
+    console.log(`Found ${syncedSlugs.size} already-synced posts on English instance\n`);
 
     const stats = { created: 0, skipped: 0, translationErrors: 0, pushErrors: 0 };
 
     for (const post of prodPosts) {
-        if (englishSlugs.has(post.slug)) {
+        if (syncedSlugs.has(post.slug)) {
             console.log(`  SKIP: "${post.title}" (${post.slug})`);
             stats.skipped++;
             continue;
@@ -300,7 +316,10 @@ async function main() {
             twitter_description: translatedPost.twitter_description,
             canonical_url: translatedPost.canonical_url,
             published_at: translatedPost.published_at,
-            tags: translatedPost.tags.map((name) => ({ name })),
+            tags: [
+                { name: SOURCE_TAG_PREFIX + post.slug },
+                ...translatedPost.tags.map((name) => ({ name })),
+            ],
         };
 
         if (translatedPost.lexical) {
