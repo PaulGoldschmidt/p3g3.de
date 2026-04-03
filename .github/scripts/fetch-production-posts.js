@@ -51,9 +51,12 @@ async function main() {
     const currentSlugsJson = JSON.stringify(currentSlugs);
 
     let hasNewPosts = true;
+    const forceSync = process.env.FORCE_SYNC === 'true';
     const cacheFile = 'cached-production-slugs.json';
 
-    if (fs.existsSync(cacheFile)) {
+    if (forceSync) {
+        console.log('\nForce sync enabled — skipping cache check.');
+    } else if (fs.existsSync(cacheFile)) {
         const cachedSlugsJson = fs.readFileSync(cacheFile, 'utf-8');
         if (cachedSlugsJson === currentSlugsJson) {
             console.log('\nNo new posts since last run — skipping sync.');

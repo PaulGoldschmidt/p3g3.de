@@ -1,0 +1,57 @@
+name: Force Sync Content to Staging
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fetch-production:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Ghost Admin API client
+        run: npm install --no-save @tryghost/admin-api
+
+      - name: Fetch posts from production
+        run: node .github/scripts/fetch-production-posts.js
+        env:
+          GHOST_ADMIN_API_URL: ${{ secrets.GHOST_ADMIN_API_URL }}
+          GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_API_KEY }}
+          FORCE_SYNC: 'true'
+
+      - name: Upload production posts
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-posts
+          path: production-posts.json
+          retention-days: 1
+
+  force-push-to-staging:
+    needs: fetch-production
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Ghost Admin API client
+        run: npm install --no-save @tryghost/admin-api
+
+      - name: Download production posts
+        uses: actions/download-artifact@v4
+        with:
+          name: production-posts
+
+      - name: Force push all posts to staging
+        run: node .github/scripts/force-push-to-staging.js
+        env:
+          GHOST_ADMIN_API_URL: ${{ secrets.GHOST_ADMIN_API_URL }}
+          GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_API_KEY }}
