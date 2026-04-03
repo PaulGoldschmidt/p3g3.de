@@ -30,6 +30,16 @@ jobs:
             const sig = crypto.createHmac('sha256',Buffer.from(secret,'hex')).update(header+'.'+payload).digest('base64url');
             console.log(header+'.'+payload+'.'+sig);
           ")
-          curl --fail-with-body -X POST "${GHOST_ADMIN_API_URL}/ghost/api/admin/redirects/upload/" \
+          echo "--- Testing token against /site/ endpoint ---"
+          curl -s -w "\nHTTP Status: %{http_code}\n" \
             -H "Authorization: Ghost ${TOKEN}" \
-            -F "file=@redirects.json;type=application/json"
+            "${GHOST_ADMIN_API_URL}/ghost/api/admin/site/"
+          echo ""
+          echo "--- Uploading redirects.json ---"
+          echo "File contents:"
+          cat redirects.json
+          echo ""
+          curl -v -X POST "${GHOST_ADMIN_API_URL}/ghost/api/admin/redirects/upload/" \
+            -H "Authorization: Ghost ${TOKEN}" \
+            -F "file=@redirects.json;type=application/json" \
+            2>&1 | grep -v "Authorization:"
