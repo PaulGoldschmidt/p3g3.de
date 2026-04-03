@@ -22,6 +22,7 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const SKIP_NODE_TYPES = new Set(['codeblock', 'code']);
+const TEXT_NODE_TYPES = new Set(['text', 'extended-text']);
 
 // --- Lexical tree walking ---
 
@@ -29,7 +30,7 @@ function walkLexical(node, callback) {
     if (!node || typeof node !== 'object') return;
     if (SKIP_NODE_TYPES.has(node.type)) return;
 
-    if (node.type === 'text' && typeof node.text === 'string' && node.text.trim()) {
+    if (TEXT_NODE_TYPES.has(node.type) && typeof node.text === 'string' && node.text.trim()) {
         callback(node, 'text');
     }
 
