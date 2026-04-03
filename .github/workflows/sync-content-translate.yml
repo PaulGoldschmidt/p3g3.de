@@ -1,0 +1,74 @@
+name: Sync Content to English (Translated)
+
+on:
+  schedule:
+    - cron: '30 4 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: translate-english
+  cancel-in-progress: false
+
+jobs:
+  fetch-production:
+    runs-on: ubuntu-latest
+    environment: production
+    outputs:
+      has_new_posts: ${{ steps.fetch.outputs.has_new_posts }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Ghost Admin API client
+        run: npm install --no-save @tryghost/admin-api
+
+      - name: Restore slug cache
+        uses: actions/cache@v4
+        with:
+          path: cached-production-slugs.json
+          key: production-slugs-translate
+
+      - name: Fetch posts from production
+        id: fetch
+        run: node .github/scripts/fetch-production-posts.js
+        env:
+          GHOST_ADMIN_API_URL: ${{ secrets.GHOST_ADMIN_API_URL }}
+          GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_API_KEY }}
+
+      - name: Upload production posts
+        if: steps.fetch.outputs.has_new_posts == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-posts
+          path: production-posts.json
+          retention-days: 1
+
+  translate-and-push:
+    needs: fetch-production
+    if: needs.fetch-production.outputs.has_new_posts == 'true'
+    runs-on: ubuntu-latest
+    environment: production-english
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install --no-save @tryghost/admin-api openai
+
+      - name: Download production posts
+        uses: actions/download-artifact@v4
+        with:
+          name: production-posts
+
+      - name: Translate and push to English Ghost
+        run: node .github/scripts/translate-push-to-english.js
+        env:
+          GHOST_ADMIN_API_URL: ${{ secrets.GHOST_ADMIN_API_URL }}
+          GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
