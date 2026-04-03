@@ -7,9 +7,26 @@ const zip = require('gulp-zip').default;
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 
+const {Transform} = require('stream');
+
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const easyimport = require('postcss-easy-import');
+
+function replaceVersion() {
+    const version = require('./package.json').version;
+    return new Transform({
+        objectMode: true,
+        transform(file, enc, cb) {
+            if (file.isBuffer()) {
+                file.contents = Buffer.from(
+                    file.contents.toString().replace('%%VERSION%%', version)
+                );
+            }
+            cb(null, file);
+        }
+    });
+}
 
 function serve(done) {
     livereload.listen();
@@ -49,6 +66,7 @@ function js(done) {
     pump([
         src(['assets/js/*.js'], {sourcemaps: true}),
         concat('main.js'),
+        replaceVersion(),
         uglify(),
         dest('assets/built/', {sourcemaps: '.'}),
         livereload()
