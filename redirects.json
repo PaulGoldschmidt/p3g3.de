@@ -1,7 +1,422 @@
 [
   {
-    "from": "/impressum",
-    "to": "/imprint",
+    "from": "/impressum/",
+    "to": "https://paul-goldschmidt.de/impressum/",
+    "permanent": true
+  },
+  {
+    "from": "/2020/12/die-technik-hier-dieser-seite/",
+    "to": "/2020/12/die-technik-hinter-dieser-seite/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/01/die-hoffnung-stirbt-zuletzt-der-fernlernunterrichtsstart-in-baden-wuerttemberg/",
+    "to": "/2021/01/fernlernunterrichtsstart-in-baden-wuerttemberg/",
+    "permanent": true
+  },
+  {
+    "from": "/pam1214",
+    "to": "https://p3g3.de/2021/01/plattformvergleich-arduino-raspberry-pi/",
+    "permanent": true
+  },
+  {
+    "from": "/math",
+    "to": "https://p3g3.de/2021/05/mathboard-projekt/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/09/auf-dem-fahrrad-durch-skandinavien-die-vorbereitung-teil-1-9/",
+    "to": "/2021/09/auf-dem-fahrrad-durch-skandinavien-die-vorbereitung-prolog/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/09/hej-sverige-auf-der-katamaran-faehre-von-sassnitz-bis-ystad-und-dann-nach-malmoe-teil-2/",
+    "to": "/2021/09/hej-sverige-auf-der-katamaran-faehre-von-sassnitz-bis-ystad-und-nach-malmoe/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/09/chirpanalytica-gebe-mir-deinen-twitter-nutzernamen-und-ich-sage-dir-welche-partei-du-am-naechsten-stehst/",
+    "to": "/2021/09/chirpanalytica/",
+    "permanent": true
+  },
+  {
+    "from": "/chirpanalytica",
+    "to": "https://p3g3.de/2021/09/chirpanalytica/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/09/ueber-helsingborg-zum-noerdlichsten-punkt-der-reise-und-ein-pfannkuchen-buffet-teil-4/",
+    "to": "/2021/09/ueber-helsingborg-zum-noerdlichsten-punkt-der-reise-und-ein-pfannkuchen-buffet-teil-3/",
+    "permanent": true
+  },
+  {
+    "from": "/2022/01/dvb-t-stick-als-ads-b-empfaenger-unter-x86-betreiben/",
+    "to": "/2022/01/dvb-t-stick-als-ads-b-empfaenger-x86/",
+    "permanent": true
+  },
+  {
+    "from": "/2022/05/fahrradklau-schwer-gemacht-mit-einem-airtag-auf-diebesring-spur/",
+    "to": "/2022/05/fahrradklau-schwer-gemacht/",
+    "permanent": true
+  },
+  {
+    "from": "/temperatuhr-newsletter",
+    "to": "https://dotreach.mailreflection.com/subscription/form",
+    "permanent": true
+  },
+  {
+    "from": "/2023/10/apple-homekit-mit-dem-esp2866-an-einem-abend-ein-aliexpress-lichtbild-smarthome-kompatibel-gemacht/",
+    "to": "/2023/10/apple-homekit-mit-dem-esp2866-myframe/",
+    "permanent": true
+  },
+  {
+    "from": "/myframe",
+    "to": "https://p3g3.de/2023/10/apple-homekit-mit-dem-esp2866-myframe/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/02/meross-trifft-influxdb-ein-leitfaden-zum-import-von-energieverbrauchsdaten-smarter-meross-zwischensteckdosen/",
+    "to": "/2024/02/meross-trifft-influxdb/",
+    "permanent": true
+  },
+  {
+    "from": "/alp24",
+    "to": "https://p3g3.de/2024/08/transalpin-auf-dem-l1/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/09/signing-von-commits-auf-main-branches-nachholen/",
+    "to": "/2024/08/signing-von-commits-auf-main-branches-nachholen/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/09/etappe-0-vorbereitung-ist-alles-neues-equipment-n/",
+    "to": "/2024/09/l1-etappe-0/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/08/transalpin-auf-dem-l1/",
+    "to": "/2024/08/transalpin-auf-dem-l1-ankundigung/",
+    "permanent": true
+  },
+  {
+    "from": "/l1",
+    "to": "/transalpin-wandern-l1",
+    "permanent": true
+  },
+  {
+    "from": "/2024/09/l1-etappe-0/",
+    "to": "/2024/09/vorbereitung-ist-alles/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/09/vorbereitung-ist-alles/",
+    "to": "/2024/09/transalpin-vorbereitung-ist-alles/",
+    "permanent": true
+  },
+  {
+    "from": "/2020/12/hello-world/",
+    "to": "/hello-world/",
+    "permanent": true
+  },
+  {
+    "from": "/2020/12/die-technik-hinter-dieser-seite/",
+    "to": "/die-technik-hinter-dieser-seite/",
+    "permanent": true
+  },
+  {
+    "from": "/2020/12/das-temperatuhr-projekt/",
+    "to": "/das-temperatuhr-projekt/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/01/ankundigung_pi-and-more-1214/",
+    "to": "/ankundigung_pi-and-more-1214/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/01/der-paul-award-2022/",
+    "to": "/der-paul-award-2022/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/01/fernlernunterrichtsstart-in-baden-wuerttemberg/",
+    "to": "/fernlernunterrichtsstart-in-baden-wuerttemberg/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/01/vorstellung-platformpicker/",
+    "to": "/vorstellung-platformpicker/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/01/plattformvergleich-arduino-raspberry-pi/",
+    "to": "/plattformvergleich-arduino-raspberry-pi/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/02/ein-halbes-jahr-spaeter-die-erfahrungen-mit-der-wetterstation-mws/",
+    "to": "/ein-halbes-jahr-spaeter-die-erfahrungen-mit-der-wetterstation-mws/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/02/homeschooling-einen-monat-spaeter/",
+    "to": "/homeschooling-einen-monat-spaeter/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/03/von-kuenstlicher-intelligenz-und-experimenten-mit-der-twitter-api-an-was-ich-grade-so-arbeite/",
+    "to": "/von-kuenstlicher-intelligenz-und-experimenten-mit-der-twitter-api-an-was-ich-grade-so-arbeite/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/03/neuer-server-neues-glueck/",
+    "to": "/neuer-server-neues-glueck/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/03/ich-in-einfach-genial-erfinder-format-mdr/",
+    "to": "/ich-in-einfach-genial-erfinder-format-mdr/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/04/postscriptum-der-mdr-beitrag-nach-der-ausstrahlung/",
+    "to": "/postscriptum-der-mdr-beitrag-nach-der-ausstrahlung/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/03/das-holup-bot-projekt/",
+    "to": "/das-holup-bot-projekt/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/04/sts-einfache-temperaturmessung/",
+    "to": "/sts-einfache-temperaturmessung/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/05/mathboard-projekt/",
+    "to": "/mathboard-projekt/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/09/auf-dem-fahrrad-durch-skandinavien-die-vorbereitung-prolog/",
+    "to": "/auf-dem-fahrrad-durch-skandinavien-die-vorbereitung-prolog/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/09/aller-anfang-ist-schwer-start-der-skandinavien-reise-auf-dem-fahrrad-teil-1/",
+    "to": "/aller-anfang-ist-schwer-start-der-skandinavien-reise-auf-dem-fahrrad-teil-1/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/09/hej-sverige-auf-der-katamaran-faehre-von-sassnitz-bis-ystad-und-nach-malmoe/",
+    "to": "/hej-sverige-auf-der-katamaran-faehre-von-sassnitz-bis-ystad-und-nach-malmoe/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/09/chirpanalytica/",
+    "to": "/chirpanalytica/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/09/ueber-helsingborg-zum-noerdlichsten-punkt-der-reise-und-ein-pfannkuchen-buffet-teil-3/",
+    "to": "/ueber-helsingborg-zum-noerdlichsten-punkt-der-reise-und-ein-pfannkuchen-buffet-teil-3/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/10/mit-bohnen-kaffe-nach-kopenhagen-teil-4/",
+    "to": "/mit-bohnen-kaffe-nach-kopenhagen-teil-4/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/10/eine-daenische-huegel-tour-nach-vordingborg-teil-5/",
+    "to": "/eine-daenische-huegel-tour-nach-vordingborg-teil-5/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/10/zurueck-nach-deutschland-ueber-gedser-nach-rostock-teil-6/",
+    "to": "/zurueck-nach-deutschland-ueber-gedser-nach-rostock-teil-6/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/10/von-rostock-in-die-bundeshauptstadt-hypermiling-auf-dem-fahrrad-teil-7/",
+    "to": "/von-rostock-in-die-bundeshauptstadt-hypermiling-auf-dem-fahrrad-teil-7/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/12/mit-dem-fahrrad-an-der-deutsch-skandinavischen-kuste/",
+    "to": "/mit-dem-fahrrad-an-der-deutsch-skandinavischen-kuste/",
+    "permanent": true
+  },
+  {
+    "from": "/2022/01/dvb-t-stick-als-ads-b-empfaenger-x86/",
+    "to": "/dvb-t-stick-als-ads-b-empfaenger-x86/",
+    "permanent": true
+  },
+  {
+    "from": "/2021/10/elon-musk-armin-laschet-und-hallo-lausitz-teil-8/",
+    "to": "/elon-musk-armin-laschet-und-hallo-lausitz-teil-8/",
+    "permanent": true
+  },
+  {
+    "from": "/2022/03/von-a-wie-abitur-bis-z-wie-zebraanalyse-meine-aktuellen-projekte-2022-01/",
+    "to": "/von-a-wie-abitur-bis-z-wie-zebraanalyse-meine-aktuellen-projekte-2022-01/",
+    "permanent": true
+  },
+  {
+    "from": "/2022/05/fahrradklau-schwer-gemacht/",
+    "to": "/fahrradklau-schwer-gemacht/",
+    "permanent": true
+  },
+  {
+    "from": "/2022/05/osamd-workshops-herbst-2022/",
+    "to": "/osamd-workshops-herbst-2022/",
+    "permanent": true
+  },
+  {
+    "from": "/2022/08/bau-die-temperatuhr-selber-mit-mir-zusammen-mit-dem-fed-auf-der-makerfaire-hannover-2022/",
+    "to": "/bau-die-temperatuhr-selber-mit-mir-zusammen-mit-dem-fed-auf-der-makerfaire-hannover-2022/",
+    "permanent": true
+  },
+  {
+    "from": "/2022/12/osamd-macht-karriere-mein-gewinn-beim-deutschen-engagementspreis-2022/",
+    "to": "/osamd-macht-karriere-mein-gewinn-beim-deutschen-engagementspreis-2022/",
+    "permanent": true
+  },
+  {
+    "from": "/2023/06/ki-veraendert-die-welt-und-was-bedeutet-das-fuer-mich-begleitbeitrag-zum-vortrag/",
+    "to": "/ki-veraendert-die-welt-und-was-bedeutet-das-fuer-mich-begleitbeitrag-zum-vortrag/",
+    "permanent": true
+  },
+  {
+    "from": "/2023/10/apple-homekit-mit-dem-esp2866-myframe/",
+    "to": "/apple-homekit-mit-dem-esp2866-myframe/",
+    "permanent": true
+  },
+  {
+    "from": "/2023/12/on-the-future-of-digitalization/",
+    "to": "/on-the-future-of-digitalization/",
+    "permanent": true
+  },
+  {
+    "from": "/2023/12/das-ende-von-chirpanalytica/",
+    "to": "/das-ende-von-chirpanalytica/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/02/meross-trifft-influxdb/",
+    "to": "/meross-trifft-influxdb/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/01/die-nachtschicht-werkstatt/",
+    "to": "/die-nachtschicht-werkstatt/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/02/caddy-reverse-proxy-hinter-caddy-reverse-proxy-doppelt-haelt-besser/",
+    "to": "/caddy-reverse-proxy-hinter-caddy-reverse-proxy-doppelt-haelt-besser/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/04/cpu-gpu-chip-temperatur-auf-m1-m2-m3-macs-apple-silicon-auslesen-unter-macos-sonoma/",
+    "to": "/cpu-gpu-chip-temperatur-auf-m1-m2-m3-macs-apple-silicon-auslesen-unter-macos-sonoma/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/05/qingping-air-monitor-light/",
+    "to": "/qingping-air-monitor-light/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/07/von-kunstlicher-intelligenz-und-kunstlich-intelligentem-lernen-missing-link/",
+    "to": "/von-kunstlicher-intelligenz-und-kunstlich-intelligentem-lernen-missing-link/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/07/artificial-intelligence-and-artificially-intelligent-learning-my-heise-online-missing-link-article-translated/",
+    "to": "/artificial-intelligence-and-artificially-intelligent-learning-my-heise-online-missing-link-article-translated/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/08/die-technik-dieser-webseite-2024/",
+    "to": "/die-technik-dieser-webseite-2024/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/08/transalpin-auf-dem-l1-ankundigung/",
+    "to": "/transalpin-auf-dem-l1-ankundigung/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/08/ssd-zustand-von-apple-silicon-rechnern-aehnlich-wie-crystaldiskinfo-herausfinden/",
+    "to": "/ssd-zustand-von-apple-silicon-rechnern-aehnlich-wie-crystaldiskinfo-herausfinden/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/08/30-tage-31-naechte-auf-dem-l1-transalpin-von-garmisch-partenkirchen-nach-brescia-prolog/",
+    "to": "/30-tage-31-naechte-auf-dem-l1-transalpin-von-garmisch-partenkirchen-nach-brescia-prolog/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/09/transalpin-vorbereitung-ist-alles/",
+    "to": "/transalpin-vorbereitung-ist-alles/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/08/signing-von-commits-auf-main-branches-nachholen/",
+    "to": "/signing-von-commits-auf-main-branches-nachholen/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/10/eigenes-mux-com-asset-wieder-herunterladen/",
+    "to": "/eigenes-mux-com-asset-wieder-herunterladen/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/10/tag-1-von-garmisch-patenkirchen-bernadeinsteig/",
+    "to": "/tag-1-von-garmisch-patenkirchen-bernadeinsteig/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/10/keepass-datei-in-apple-passwords-importieren/",
+    "to": "/keepass-datei-in-apple-passwords-importieren/",
+    "permanent": true
+  },
+  {
+    "from": "/2024/10/transalpin-wandern-l1/",
+    "to": "/transalpin-wandern-l1/",
+    "permanent": true
+  },
+  {
+    "from": "/2025/03/bme680-lorawan-und-kernel-paniken-wetterdaten-im-buergerportal-der-stadt-heidelberg/",
+    "to": "/bme680-lorawan-und-kernel-paniken-wetterdaten-im-buergerportal-der-stadt-heidelberg/",
+    "permanent": true
+  },
+  {
+    "from": "/2025/04/leistungleistungleistung-de-url-shorter-fuer-stiftis/",
+    "to": "/leistungleistungleistung-de-url-shorter-fuer-stiftis/",
+    "permanent": true
+  },
+  {
+    "from": "/2025/07/kleines-lebenszeichen-juli-2025/",
+    "to": "/kleines-lebenszeichen-juli-2025/",
+    "permanent": true
+  },
+  {
+    "from": "/2025/08/yourstats-meine-erste-app/",
+    "to": "/yourstats-meine-erste-app/",
+    "permanent": true
+  },
+  {
+    "from": "/2025/12/der-advent-of-code-2025-geloest-in-c/",
+    "to": "/der-advent-of-code-2025-geloest-in-c/",
+    "permanent": true
+  },
+  {
+    "from": "/2026/01/meine-zeit-in-stanford-sommer-im-bear-state/",
+    "to": "/meine-zeit-in-stanford-sommer-im-bear-state/",
     "permanent": true
   }
 ]
