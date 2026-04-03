@@ -88,6 +88,10 @@
         "type": "boolean",
         "default": true,
         "group": "post"
+      },
+      "matomo_site_id": {
+        "type": "text",
+        "description": "Matomo site ID (leave empty to disable tracking)"
       }
     }
   }
