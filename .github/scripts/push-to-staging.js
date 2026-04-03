@@ -1,11 +1,7 @@
+const fs = require('fs');
 const GhostAdminAPI = require('@tryghost/admin-api');
 
-const REQUIRED_ENV = [
-    'PROD_GHOST_URL',
-    'PROD_GHOST_KEY',
-    'STAGING_GHOST_URL',
-    'STAGING_GHOST_KEY',
-];
+const REQUIRED_ENV = ['GHOST_ADMIN_API_URL', 'GHOST_ADMIN_API_KEY'];
 
 for (const key of REQUIRED_ENV) {
     if (!process.env[key]) {
@@ -14,49 +10,20 @@ for (const key of REQUIRED_ENV) {
     }
 }
 
-const prodApi = new GhostAdminAPI({
-    url: process.env.PROD_GHOST_URL,
-    key: process.env.PROD_GHOST_KEY,
-    version: 'v5.0',
-});
-
-const stagingApi = new GhostAdminAPI({
-    url: process.env.STAGING_GHOST_URL,
-    key: process.env.STAGING_GHOST_KEY,
+const api = new GhostAdminAPI({
+    url: process.env.GHOST_ADMIN_API_URL,
+    key: process.env.GHOST_ADMIN_API_KEY,
     version: 'v5.0',
 });
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-async function fetchAllPosts(api) {
-    const allPosts = [];
-    let page = 1;
-
-    while (true) {
-        const result = await api.posts.browse({
-            limit: 15,
-            page,
-            filter: 'status:[published,draft]',
-            formats: 'lexical,mobiledoc',
-            include: 'tags',
-        });
-
-        allPosts.push(...result);
-
-        if (!result.meta.pagination.next) break;
-        page = result.meta.pagination.next;
-        await sleep(50);
-    }
-
-    return allPosts;
-}
 
 async function fetchStagingSlugs() {
     const slugs = new Set();
     let page = 1;
 
     while (true) {
-        const result = await stagingApi.posts.browse({
+        const result = await api.posts.browse({
             limit: 15,
             page,
             filter: 'status:[published,draft]',
@@ -76,13 +43,11 @@ async function fetchStagingSlugs() {
 }
 
 async function main() {
-    console.log('Starting content sync from production to staging...\n');
-
-    const prodPosts = await fetchAllPosts(prodApi);
-    console.log(`Found ${prodPosts.length} posts on production`);
+    const prodPosts = JSON.parse(fs.readFileSync('production-posts.json', 'utf-8'));
+    console.log(`Loaded ${prodPosts.length} production posts\n`);
 
     const stagingSlugs = await fetchStagingSlugs();
-    console.log(`Found ${stagingSlugs.size} posts on staging\n`);
+    console.log(`Found ${stagingSlugs.size} existing posts on staging\n`);
 
     const stats = { created: 0, skipped: 0, errors: 0 };
 
@@ -111,7 +76,7 @@ async function main() {
             twitter_description: post.twitter_description,
             canonical_url: post.canonical_url,
             published_at: post.published_at,
-            tags: post.tags ? post.tags.map((t) => ({ name: t.name })) : [],
+            tags: post.tags.map((name) => ({ name })),
         };
 
         if (post.lexical) {
@@ -125,7 +90,7 @@ async function main() {
         }
 
         try {
-            await stagingApi.posts.add(postData);
+            await api.posts.add(postData);
             console.log(`  CREATE: "${post.title}" (${post.slug})`);
             stats.created++;
         } catch (err) {
