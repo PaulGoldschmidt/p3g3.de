@@ -6,7 +6,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    environment: production
+    strategy:
+      matrix:
+        environment: [production, production-english]
+    environment: ${{ matrix.environment }}
     steps:
       - uses: actions/checkout@v4
       - name: Deploy Ghost Theme
