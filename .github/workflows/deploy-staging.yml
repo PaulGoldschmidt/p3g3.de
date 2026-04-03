@@ -19,7 +19,7 @@ jobs:
       - name: Upload Redirects
         env:
           GHOST_ADMIN_API_URL: ${{ secrets.GHOST_ADMIN_API_URL }}
-          GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_API_KEY }}
+          GHOST_ADMIN_API_KEY: ${{ secrets.GHOST_ADMIN_REDIRECTS_API_KEY }}
         run: |
           TOKEN=$(node -e "
             const crypto = require('crypto');
