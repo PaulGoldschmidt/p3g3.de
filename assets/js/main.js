@@ -14,6 +14,7 @@
         var next = current === "light" ? "dark" : "light";
         document.documentElement.setAttribute("data-theme", next);
         localStorage.setItem("theme", next);
+        if (window.__applyBgColor) window.__applyBgColor();
         updateThemeWord();
     }
 
