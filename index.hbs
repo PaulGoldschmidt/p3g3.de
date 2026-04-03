@@ -1,0 +1,13 @@
+{{!< default}}
+
+<div class="gh-feed">
+    {{#if @site.description}}
+        <h2 class="gh-feed-title">{{@site.description}}</h2>
+    {{/if}}
+
+    {{#foreach posts}}
+        {{> "post-card"}}
+    {{/foreach}}
+</div>
+
+{{> "pagination"}}

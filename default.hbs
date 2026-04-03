@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="{{@site.locale}}" data-theme="dark">
+<head>
+
+    <title>{{meta_title page=(t " (Page %)")}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {{!-- Preload critical assets --}}
+    <link rel="preload" as="style" href="{{asset "built/screen.css"}}">
+    <link rel="preload" href="{{asset "fonts/Geist-Variable.woff2"}}" as="font" type="font/woff2" crossorigin>
+
+    {{!-- Theme stylesheet --}}
+    <link rel="stylesheet" type="text/css" href="{{asset "built/screen.css"}}">
+
+    {{!-- Set theme before paint to avoid flash --}}
+    <script>
+        (function () {
+            var stored = localStorage.getItem("theme");
+            if (stored) {
+                document.documentElement.setAttribute("data-theme", stored);
+            }
+        })();
+    </script>
+
+    {{!-- Ghost head (SEO, structured data, etc.) --}}
+    {{ghost_head}}
+
+</head>
+<body class="{{body_class}}">
+
+<div class="gh-viewport">
+
+    {{> "sidebar"}}
+    {{> "navigation"}}
+
+    <main class="gh-main appear" style="--delay: 1">
+        {{{body}}}
+    </main>
+
+    {{> "footer"}}
+
+</div>
+
+{{!-- Theme scripts --}}
+<script defer src="{{asset "built/main.js"}}"></script>
+
+{{!-- Ghost foot (portal, search, etc.) --}}
+{{ghost_foot}}
+
+</body>
+</html>

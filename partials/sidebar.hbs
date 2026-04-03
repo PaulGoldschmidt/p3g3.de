@@ -1,0 +1,27 @@
+<aside class="gh-sidebar appear" style="--delay: 0">
+    <a href="{{@site.url}}" class="gh-sidebar-logo" aria-label="{{@site.title}}">
+        {{> "icons/logo"}}
+    </a>
+
+    <nav class="gh-sidebar-nav">
+        {{#if @custom.portfolio_url}}
+            <a href="{{@custom.portfolio_url}}">{{t "Back to portfolio"}}</a>
+        {{/if}}
+        {{#foreach navigation}}
+            <a href="{{url}}">{{label}}</a>
+        {{/foreach}}
+    </nav>
+
+    {{#if secondary_navigation}}
+        <nav class="gh-sidebar-secondary">
+            {{#foreach secondary_navigation}}
+                <a href="{{url}}">{{label}}</a>
+            {{/foreach}}
+        </nav>
+    {{/if}}
+
+    <nav class="gh-sidebar-legal">
+        <a href="https://paul-goldschmidt.de/imprint">Imprint</a>
+        <a href="https://paul-goldschmidt.de/privacy-policy">Privacy Policy</a>
+    </nav>
+</aside>

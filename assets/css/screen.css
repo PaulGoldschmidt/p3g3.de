@@ -1,0 +1,1019 @@
+/* ============================================
+   Goldschmidt Blog — Ghost Theme Stylesheet
+   Ported from paul-goldschmidt.de (Astro)
+   ============================================ */
+
+/* === Reset === */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* === Fonts === */
+@font-face {
+    font-family: "Geist Sans";
+    src: url("../fonts/Geist-Variable.woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* === Theme Variables === */
+:root {
+    --line-height: 1.6;
+    --content-max-width: 720px;
+
+    /* Dark mode (default) */
+    --bg: #1a2124;
+    --bg-secondary: #223336;
+    --text-primary: #fafbff;
+    --text-secondary: #a6b9ba;
+    --text-tertiary: #a2acaa;
+    --accent: #e02c92;
+
+    /* Ghost custom font support */
+    --gh-font-body: "Geist Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --gh-font-heading: "Geist Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+[data-theme="light"] {
+    --bg: #fafafa;
+    --bg-secondary: #eaeaea;
+    --text-primary: #02040a;
+    --text-secondary: #343840;
+    --text-tertiary: #4d595b;
+    --accent: #e18b09;
+}
+
+/* === Base === */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--gh-font-body);
+    line-height: var(--line-height);
+    color: var(--text-secondary);
+    background-color: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* === Typography === */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+}
+
+a:hover {
+    text-decoration-color: var(--accent);
+}
+
+/* External link arrow */
+.gh-content a[href^="http"]::after,
+.gh-content a[href^="mailto"]::after {
+    content: "\2197";
+    padding-left: 0.15ch;
+    font-size: 0.85em;
+    color: var(--text-tertiary);
+}
+
+/* Suppress arrow on cards, images, buttons */
+.gh-content .kg-bookmark-container::after,
+.gh-content .kg-image-card a::after,
+.gh-content .kg-gallery-image a::after,
+.gh-content .kg-btn::after,
+.gh-content .kg-header-card a::after,
+.gh-content .kg-product-card a::after,
+.gh-content .kg-nft-card a::after {
+    content: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* === Layout === */
+.gh-viewport {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.gh-main {
+    flex: 1;
+}
+
+/* === Sidebar (Desktop ≥1024px) === */
+.gh-sidebar {
+    display: none;
+}
+
+@media screen and (min-width: 1024px) {
+    .gh-sidebar {
+        display: block;
+        position: fixed;
+        top: 4rem;
+        left: 2rem;
+        width: 120px;
+        z-index: 50;
+    }
+
+    /* Animated Logo in sidebar */
+    .gh-sidebar-logo {
+        display: block;
+        margin-bottom: 1.5rem;
+        width: 70px;
+        color: var(--text-primary);
+        text-decoration: none;
+    }
+
+    .gh-sidebar-logo svg {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+    }
+
+    /* Logo animation is shared — see below the @media (min-width: 1024px) block */
+
+    /* Shared sidebar nav group styles */
+    .gh-sidebar-nav,
+    .gh-sidebar-secondary,
+    .gh-sidebar-legal {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 0.25rem;
+    }
+
+    .gh-sidebar-secondary,
+    .gh-sidebar-legal {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--text-tertiary);
+    }
+
+    .gh-sidebar-nav a,
+    .gh-sidebar-secondary a,
+    .gh-sidebar-legal a {
+        color: var(--text-secondary);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        text-decoration-thickness: 1px;
+        font-size: 0.875rem;
+    }
+
+    .gh-sidebar-nav a:hover,
+    .gh-sidebar-secondary a:hover,
+    .gh-sidebar-legal a:hover {
+        color: var(--text-primary);
+    }
+
+    /* Legal links are slightly muted */
+    .gh-sidebar-legal a {
+        color: var(--text-tertiary);
+        font-size: 0.8rem;
+    }
+
+    /* Hide inline header on desktop — sidebar takes over */
+    .gh-head {
+        display: none;
+    }
+}
+
+/* === Inline Navigation (Mobile/Tablet <1024px) === */
+.gh-head {
+    padding: 2rem 0 1rem;
+}
+
+.gh-head-inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.gh-head-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.gh-head-brand a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Animated Logo (header — mobile/tablet) */
+.gh-head-logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+}
+
+.gh-head-logo-svg {
+    display: block;
+    width: 44px;
+    color: var(--text-primary);
+}
+
+.gh-head-logo-svg svg {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+/* Shared animated logo hover (sidebar + header) */
+.gh-sidebar-logo rect,
+.gh-head-logo-svg rect {
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+}
+
+@media (hover: hover) {
+    .gh-sidebar-logo:hover .logo-r1,
+    .gh-head-logo-link:hover .logo-r1 {
+        transform: translate(-20px, -15px);
+        opacity: 0;
+    }
+
+    .gh-sidebar-logo:hover .logo-r2,
+    .gh-head-logo-link:hover .logo-r2 {
+        transform: translate(0px, 20px);
+        opacity: 0;
+    }
+
+    .gh-sidebar-logo:hover .logo-r3,
+    .gh-head-logo-link:hover .logo-r3 {
+        transform: translate(20px, -10px);
+        opacity: 0;
+    }
+}
+
+.gh-head-logo-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.gh-head-menu {
+    display: flex;
+    align-items: center;
+    gap: 0.15rem;
+    flex-wrap: wrap;
+}
+
+.gh-head-menu a {
+    color: var(--text-secondary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+    font-size: 0.875rem;
+}
+
+.gh-head-menu a:hover {
+    color: var(--text-primary);
+}
+
+/* Comma-separated nav links like the Astro inline nav */
+.gh-head-menu .nav-item:not(:last-child)::after {
+    content: ",";
+    color: var(--text-secondary);
+    margin-right: 0.2rem;
+}
+
+/* No external arrow on nav links */
+.gh-head-menu a::after {
+    content: none;
+}
+
+/* Mobile hamburger */
+.gh-burger {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    padding: 0.25rem;
+}
+
+.gh-burger svg {
+    width: 24px;
+    height: 24px;
+}
+
+@media (max-width: 600px) {
+    .gh-head-menu {
+        display: none;
+    }
+
+    .gh-burger {
+        display: block;
+    }
+
+    .gh-head.is-open .gh-head-menu {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid var(--bg-secondary);
+        z-index: 99;
+    }
+
+    .gh-head.is-open .gh-head-menu .nav-item:not(:last-child)::after {
+        content: none;
+    }
+
+    .gh-head {
+        position: relative;
+    }
+}
+
+/* === Post Feed === */
+.gh-feed {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.gh-feed-title {
+    padding: 2rem 0 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* === Post Card === */
+.post-card {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--bg-secondary);
+}
+
+.post-card:first-child {
+    padding-top: 0;
+}
+
+.post-card:last-child {
+    border-bottom: none;
+}
+
+.post-card-link {
+    display: flex;
+    gap: 1.25rem;
+    text-decoration: none;
+    color: inherit;
+}
+
+.post-card-link:hover .post-card-title {
+    text-decoration-color: var(--accent);
+}
+
+.post-card-image {
+    flex-shrink: 0;
+    width: 120px;
+    height: 80px;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: var(--bg-secondary);
+}
+
+.post-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.post-card-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.post-card-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+    text-decoration-color: transparent;
+    transition: text-decoration-color 0.15s;
+    line-height: 1.4;
+}
+
+.post-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    margin-top: 0.2rem;
+}
+
+.post-card-meta .bull {
+    color: var(--text-tertiary);
+}
+
+.post-card-excerpt {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-top: 0.35rem;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.post-card .member-lock {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-tertiary);
+}
+
+.post-card .member-lock svg {
+    width: 12px;
+    height: 12px;
+}
+
+/* No-image variant */
+.post-card.no-image .post-card-link {
+    gap: 0;
+}
+
+@media (max-width: 600px) {
+    .post-card-image {
+        width: 80px;
+        height: 60px;
+        border-radius: 8px;
+    }
+
+    .post-card-excerpt {
+        -webkit-line-clamp: 1;
+    }
+}
+
+/* === Pagination === */
+.gh-pagination {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: var(--text-tertiary);
+}
+
+.gh-pagination a {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.gh-pagination a:hover {
+    color: var(--text-primary);
+}
+
+.gh-pagination .page-number {
+    color: var(--text-tertiary);
+    font-size: 0.8rem;
+}
+
+/* === Article (Single Post) === */
+.gh-article {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.gh-article-header {
+    padding: 2rem 0 1.5rem;
+}
+
+.gh-article-tag {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: var(--accent);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.gh-article-tag:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.gh-article-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+}
+
+.gh-article-excerpt {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-top: 0.75rem;
+}
+
+.gh-article-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+    font-size: 0.875rem;
+    color: var(--text-tertiary);
+}
+
+.gh-article-meta .author-profile-image {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: var(--bg-secondary);
+}
+
+.gh-article-meta-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.gh-article-author-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.gh-article-author-name a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.gh-article-author-name a:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.gh-article-meta-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+}
+
+/* === Feature Image === */
+.gh-feature-image {
+    margin: 1.5rem 0;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.gh-feature-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.gh-feature-image figcaption {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    text-align: center;
+    padding-top: 0.75rem;
+}
+
+/* === Content (Post Body) === */
+.gh-content {
+    --main: min(var(--content-max-width), 100%);
+    --wide: minmax(0, calc((1200px - var(--content-max-width)) / 2));
+    --full: minmax(1.5rem, 1fr);
+
+    display: grid;
+    grid-template-columns:
+        [full-start] var(--full)
+        [wide-start] var(--wide)
+        [main-start] var(--main) [main-end]
+        var(--wide) [wide-end]
+        var(--full) [full-end];
+    word-break: break-word;
+}
+
+.gh-content > * {
+    grid-column: main;
+}
+
+.gh-content .kg-width-wide {
+    grid-column: wide;
+}
+
+.gh-content .kg-width-full {
+    grid-column: full;
+}
+
+/* Headings in article content */
+.gh-content h2 {
+    font-size: 1.4rem;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.gh-content h3 {
+    font-size: 1.2rem;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.gh-content h4 {
+    font-size: 1.05rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Paragraphs */
+.gh-content p {
+    margin-bottom: 1.25rem;
+    line-height: var(--line-height);
+}
+
+/* Lists */
+.gh-content ul,
+.gh-content ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.gh-content li {
+    margin-bottom: 0.35rem;
+    line-height: var(--line-height);
+}
+
+.gh-content li p {
+    margin-bottom: 0;
+}
+
+/* Blockquotes */
+.gh-content blockquote {
+    border-left: 3px solid var(--accent);
+    padding-left: 1.25rem;
+    margin: 1.5rem 0;
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.gh-content blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+/* Code */
+.gh-content code {
+    font-family: "JetBrains Mono", "SF Mono", "Fira Code", monospace;
+    font-size: 0.875em;
+    background: var(--bg-secondary);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+}
+
+.gh-content pre {
+    background: var(--bg-secondary);
+    padding: 1.25rem;
+    border-radius: 12px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    line-height: 1.5;
+}
+
+.gh-content pre code {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    font-size: 0.85rem;
+}
+
+/* Tables */
+.gh-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+}
+
+.gh-content th,
+.gh-content td {
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--bg-secondary);
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.gh-content th {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Horizontal rule */
+.gh-content hr {
+    border: none;
+    border-top: 1px solid var(--bg-secondary);
+    margin: 2rem 0;
+}
+
+/* Images in content */
+.gh-content img {
+    border-radius: 16px;
+}
+
+.gh-content figcaption {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    text-align: center;
+    padding-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+/* === Ghost Card Overrides (Dark Mode) === */
+.kg-bookmark-container {
+    border-color: var(--bg-secondary) !important;
+}
+
+.kg-bookmark-container,
+.kg-bookmark-content {
+    background: var(--bg-secondary) !important;
+}
+
+.kg-bookmark-title {
+    color: var(--text-primary) !important;
+}
+
+.kg-bookmark-description {
+    color: var(--text-secondary) !important;
+}
+
+.kg-bookmark-metadata {
+    color: var(--text-tertiary) !important;
+}
+
+.kg-callout-card {
+    background: var(--bg-secondary) !important;
+    color: var(--text-secondary) !important;
+}
+
+.kg-toggle-card {
+    background: var(--bg-secondary) !important;
+}
+
+.kg-toggle-heading-text {
+    color: var(--text-primary) !important;
+}
+
+.kg-toggle-content {
+    color: var(--text-secondary) !important;
+}
+
+.kg-header-card h2,
+.kg-header-card h3 {
+    color: inherit !important;
+}
+
+/* === Related Posts === */
+.gh-related {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 2rem 1.5rem 0;
+    border-top: 1px solid var(--bg-secondary);
+    margin-top: 3rem;
+}
+
+.gh-related-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+}
+
+/* === Archive Pages (Tag / Author) === */
+.gh-archive {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.gh-archive-header {
+    padding: 2rem 0 1rem;
+}
+
+.gh-archive-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.gh-archive-description {
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+    line-height: var(--line-height);
+}
+
+.gh-archive-image {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    background-color: var(--bg-secondary);
+}
+
+.gh-author-links {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.gh-author-links a {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.gh-author-links a:hover {
+    color: var(--text-primary);
+}
+
+/* === Static Page === */
+.gh-page {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.gh-page-header {
+    padding: 2rem 0 1.5rem;
+}
+
+.gh-page-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+/* === Error Page === */
+.gh-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 1.5rem;
+    text-align: center;
+    min-height: 50vh;
+}
+
+.gh-error-code {
+    font-size: 6rem;
+    font-weight: 600;
+    color: var(--text-tertiary);
+    line-height: 1;
+    opacity: 0.3;
+}
+
+.gh-error-message {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-top: 1rem;
+}
+
+.gh-error-link {
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+}
+
+/* === Theme Toggle === */
+.theme-toggle {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+}
+
+.theme-toggle:hover {
+    text-decoration-color: var(--accent);
+}
+
+/* === Footer === */
+.gh-foot {
+    padding: 3rem 0;
+    text-align: center;
+}
+
+.gh-foot-inner {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.gh-foot-line {
+    color: var(--text-tertiary);
+    font-size: 0.875rem;
+}
+
+.gh-foot-subscribe {
+    margin-top: 0.75rem;
+}
+
+.gh-foot-subscribe a {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.gh-foot-meta {
+    margin-top: 0.75rem;
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+}
+
+.gh-foot-meta a {
+    color: var(--text-tertiary);
+    font-size: 0.75rem;
+}
+
+.gh-foot-meta a:hover {
+    color: var(--text-secondary);
+}
+
+/* === Comments === */
+.gh-comments {
+    max-width: var(--content-max-width);
+    margin: 2rem auto 0;
+    padding: 0 1.5rem;
+}
+
+/* === Page Load Animation === */
+@keyframes appear {
+    0%      { opacity: 0;     filter: blur(4px);    transform: translateY(10px); }
+    6.667%  { opacity: 0.618; filter: blur(1.528px); transform: translateY(4.932px); }
+    13.333% { opacity: 0.921; filter: blur(0.317px); transform: translateY(-0.524px); }
+    20%     { opacity: 0.986; filter: blur(0.055px); transform: translateY(-1.568px); }
+    26.667% { opacity: 0.998; filter: blur(0.009px); transform: translateY(-0.552px); }
+    33.333% { opacity: 1;     filter: blur(0.001px); transform: translateY(0.180px); }
+    40%     { opacity: 1;     filter: blur(0);       transform: translateY(0.229px); }
+    46.667% { opacity: 1;     filter: blur(0);       transform: translateY(0.053px); }
+    53.333% { opacity: 1;     filter: blur(0);       transform: translateY(-0.039px); }
+    60%     { opacity: 1;     filter: blur(0);       transform: translateY(-0.031px); }
+    66.667% { opacity: 1;     filter: blur(0);       transform: translateY(-0.003px); }
+    73.333% { opacity: 1;     filter: blur(0);       transform: translateY(0.007px); }
+    80%     { opacity: 1;     filter: blur(0);       transform: translateY(0.004px); }
+    86.667% { opacity: 1;     filter: blur(0);       transform: translateY(0); }
+    93.333% { opacity: 1;     filter: blur(0);       transform: translateY(-0.001px); }
+    100%    { opacity: 1;     filter: blur(0);       transform: translateY(0); }
+}
+
+@media not (prefers-reduced-motion: reduce) {
+    html.animate-appear .appear {
+        opacity: 0;
+        animation: appear 2.495s linear both;
+        animation-delay: calc(0.2s + var(--delay, 0) * 0.2s);
+        will-change: transform, opacity;
+    }
+}
+
+/* === Heading target highlight === */
+@keyframes highlight {
+    0%   {  }
+    40%  { filter: blur(0.5px) brightness(2); text-shadow: var(--accent) 0 0 2px, var(--accent) 0 0 10px; }
+    60%  { filter: blur(0.5px) brightness(2); text-shadow: var(--accent) 0 0 2px, var(--accent) 0 0 10px; }
+    100% {  }
+}
+
+h1:target, h2:target, h3:target {
+    animation: highlight 1s linear both;
+    animation-delay: 0.6s;
+}

@@ -1,0 +1,17 @@
+{{#if pagination}}
+<nav class="gh-pagination">
+    {{#if pagination.prev}}
+        <a href="{{page_url pagination.prev}}">&larr; {{t "Newer Posts"}}</a>
+    {{else}}
+        <span></span>
+    {{/if}}
+
+    <span class="page-number">{{t "Page {page} of {totalPages}" page=pagination.page totalPages=pagination.pages}}</span>
+
+    {{#if pagination.next}}
+        <a href="{{page_url pagination.next}}">{{t "Older Posts"}} &rarr;</a>
+    {{else}}
+        <span></span>
+    {{/if}}
+</nav>
+{{/if}}

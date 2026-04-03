@@ -1,0 +1,26 @@
+{{!< default}}
+
+<div class="gh-archive">
+    <header class="gh-archive-header">
+        {{#if primary_author.profile_image}}
+            <img class="gh-archive-image" src="{{img_url primary_author.profile_image size="m"}}" alt="{{primary_author.name}}">
+        {{/if}}
+        <h1 class="gh-archive-title">{{primary_author.name}}</h1>
+        {{#if primary_author.bio}}
+            <p class="gh-archive-description">{{primary_author.bio}}</p>
+        {{/if}}
+        <div class="gh-author-links">
+            {{#if primary_author.website}}
+                <a href="{{primary_author.website}}">{{t "Back to portfolio"}}</a>
+            {{/if}}
+        </div>
+    </header>
+</div>
+
+<div class="gh-feed">
+    {{#foreach posts}}
+        {{> "post-card" lazyLoad=true}}
+    {{/foreach}}
+</div>
+
+{{> "pagination"}}

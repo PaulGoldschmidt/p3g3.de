@@ -1,0 +1,16 @@
+<footer class="gh-foot appear" style="--delay: 3">
+    <div class="gh-foot-inner">
+        <p class="gh-foot-line">
+            You reached the end of the <button class="theme-toggle" aria-label="Toggle light/dark mode"><span class="theme-word">dark</span></button> page.
+        </p>
+
+        {{#if @site.members_enabled}}
+            <p class="gh-foot-subscribe">
+                <a href="#/portal/signup">{{t "Subscribe"}}</a>
+            </p>
+        {{/if}}
+
+        <p class="gh-foot-meta">
+            &copy; {{date format="YYYY"}} {{@site.title}} &middot; </p>
+    </div>
+</footer>

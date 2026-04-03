@@ -1,0 +1,21 @@
+{{!< default}}
+
+<div class="gh-archive">
+    <header class="gh-archive-header">
+        {{#if tag.feature_image}}
+            <img class="gh-archive-image" src="{{img_url tag.feature_image size="s"}}" alt="{{tag.name}}">
+        {{/if}}
+        <h1 class="gh-archive-title">{{tag.name}}</h1>
+        {{#if tag.description}}
+            <p class="gh-archive-description">{{tag.description}}</p>
+        {{/if}}
+    </header>
+</div>
+
+<div class="gh-feed">
+    {{#foreach posts}}
+        {{> "post-card" lazyLoad=true}}
+    {{/foreach}}
+</div>
+
+{{> "pagination"}}

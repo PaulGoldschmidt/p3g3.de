@@ -1,0 +1,20 @@
+{{!< default}}
+
+{{#post}}
+
+<article class="gh-page {{post_class}}">
+
+    {{#match @page.show_title_and_feature_image}}
+        <header class="gh-page-header">
+            <h1 class="gh-page-title">{{title}}</h1>
+            {{> "feature-image"}}
+        </header>
+    {{/match}}
+
+    <section class="gh-content">
+        {{content}}
+    </section>
+
+</article>
+
+{{/post}}

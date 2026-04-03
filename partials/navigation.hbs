@@ -1,0 +1,33 @@
+{{!-- Inline header navigation — visible on mobile/tablet, hidden on desktop where sidebar takes over --}}
+<header class="gh-head appear" style="--delay: 0">
+    <div class="gh-head-inner">
+        <div class="gh-head-brand">
+            <a href="{{@site.url}}" class="gh-head-logo-link" aria-label="{{@site.title}}">
+                <span class="gh-head-logo-svg">{{> "icons/logo"}}</span>
+                <span class="gh-head-logo-text">{{@site.title}}</span>
+            </a>
+        </div>
+
+        <nav class="gh-head-menu">
+            {{#if @custom.portfolio_url}}
+                <span class="nav-item"><a class="gh-head-portfolio" href="{{@custom.portfolio_url}}">{{t "Back to portfolio"}}</a></span>
+            {{/if}}
+            {{#foreach navigation}}
+                <span class="nav-item"><a href="{{url}}">{{label}}</a></span>
+            {{/foreach}}
+            {{#foreach secondary_navigation}}
+                <span class="nav-item"><a href="{{url}}">{{label}}</a></span>
+            {{/foreach}}
+            <span class="nav-item"><a href="https://paul-goldschmidt.de/imprint">Imprint</a></span>
+            <span class="nav-item"><a href="https://paul-goldschmidt.de/privacy-policy">Privacy Policy</a></span>
+        </nav>
+
+        <button class="gh-burger" aria-label="{{t "Toggle menu"}}">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+    </div>
+</header>

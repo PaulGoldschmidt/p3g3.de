@@ -1,0 +1,94 @@
+{
+    "name": "goldschmidt-blog",
+    "description": "A minimal, dark-mode blog theme matching paul-goldschmidt.de",
+    "version": "1.0.0",
+    "engines": {
+        "ghost": ">=5.0.0"
+    },
+    "license": "MIT",
+    "scripts": {
+        "dev": "gulp",
+        "build": "gulp build",
+        "zip": "gulp zip",
+        "test": "gscan .",
+        "test:ci": "gscan --fatal --verbose .",
+        "pretest": "gulp build"
+    },
+    "author": {
+        "name": "Paul Goldschmidt",
+        "email": "kontakt@paul-goldschmidt.de",
+        "url": "https://paul-goldschmidt.de"
+    },
+    "gpm": {
+        "type": "theme",
+        "categories": [
+            "Minimal",
+            "Blog"
+        ]
+    },
+    "keywords": [
+        "ghost",
+        "theme",
+        "ghost-theme",
+        "minimal",
+        "dark-mode"
+    ],
+    "devDependencies": {
+        "autoprefixer": "10.4.24",
+        "cssnano": "7.1.2",
+        "gscan": "5.2.4",
+        "gulp": "5.0.1",
+        "gulp-concat": "2.6.1",
+        "gulp-livereload": "4.0.2",
+        "gulp-postcss": "10.0.0",
+        "gulp-uglify": "3.0.2",
+        "gulp-zip": "6.1.0",
+        "postcss": "8.5.6",
+        "postcss-easy-import": "4.0.0",
+        "pump": "3.0.3"
+    },
+    "browserslist": [
+        "defaults"
+    ],
+    "config": {
+        "posts_per_page": 10,
+        "image_sizes": {
+            "xs": {
+                "width": 160
+            },
+            "s": {
+                "width": 320
+            },
+            "m": {
+                "width": 600
+            },
+            "l": {
+                "width": 960
+            },
+            "xl": {
+                "width": 1200
+            },
+            "xxl": {
+                "width": 2000
+            }
+        },
+        "card_assets": true,
+        "custom": {
+            "portfolio_url": {
+                "type": "text",
+                "default": "https://paul-goldschmidt.de",
+                "description": "URL to your portfolio site (shown in navigation)"
+            },
+            "show_reading_time": {
+                "type": "boolean",
+                "default": true,
+                "group": "post"
+            },
+            "show_related_posts": {
+                "type": "boolean",
+                "default": true,
+                "group": "post"
+            }
+        }
+    }
+}
