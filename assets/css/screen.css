@@ -234,7 +234,8 @@ img {
 }
 
 .gh-head-logo-svg {
-    display: block;
+    display: flex;
+    align-items: center;
     width: 44px;
     color: var(--text-primary);
 }
