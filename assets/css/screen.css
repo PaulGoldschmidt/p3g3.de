@@ -361,7 +361,17 @@ img {
         flex-wrap: wrap;
     }
 
+    .gh-head.is-open .gh-head-brand {
+        order: 1;
+    }
+
+    .gh-head.is-open .gh-head-actions {
+        order: 2;
+        margin-left: auto;
+    }
+
     .gh-head.is-open .gh-head-menu {
+        order: 3;
         width: 100%;
     }
 }
