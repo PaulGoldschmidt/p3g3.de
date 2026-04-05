@@ -41,6 +41,17 @@
     </header>
 
     <section class="gh-content">
+        {{#if @custom.show_toc}}
+        <div class="gh-toc-wrapper">
+            <div class="gh-toc-header">
+                <span class="gh-toc-title">{{t "Table of contents"}}</span>
+                <button class="gh-toc-toggle" aria-label="Toggle table of contents">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                </button>
+            </div>
+            <nav class="gh-toc" aria-label="Table of contents"></nav>
+        </div>
+        {{/if}}
         {{content}}
     </section>
 

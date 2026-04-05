@@ -760,6 +760,122 @@ img {
     margin-bottom: 1rem;
 }
 
+/* === Table of Contents (Tocbot) === */
+.gh-toc .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.gh-toc .toc-list .toc-list {
+    padding-left: 1rem;
+}
+
+.gh-toc .toc-link {
+    display: block;
+    padding: 0.25rem 0;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    transition: color 0.15s;
+}
+
+.gh-toc .toc-link:hover {
+    color: var(--text-primary);
+}
+
+.gh-toc .is-active-link {
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.gh-toc-wrapper {
+    grid-column: main;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--bg-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.gh-toc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 1rem;
+    cursor: pointer;
+    background: var(--bg-secondary);
+}
+
+.gh-toc-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.gh-toc-toggle {
+    background: none;
+    border: none;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    transition: transform 0.2s;
+}
+
+.gh-toc-wrapper.is-expanded .gh-toc-toggle {
+    transform: rotate(180deg);
+}
+
+.gh-toc-wrapper .gh-toc {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 1rem;
+}
+
+.gh-toc-wrapper.is-expanded .gh-toc {
+    max-height: 60vh;
+    padding: 0.5rem 1rem 1rem;
+}
+
+@media screen and (min-width: 1280px) {
+    .gh-toc-wrapper {
+        grid-column: main-end / wide-end;
+        grid-row: 1 / span 9999;
+        position: sticky;
+        top: 4rem;
+        align-self: start;
+        margin: 0;
+        border: none;
+        border-radius: 0;
+        border-left: 1px solid var(--bg-secondary);
+        overflow: visible;
+        background: none;
+        padding-left: 1rem;
+        max-height: calc(100vh - 6rem);
+        overflow-y: auto;
+    }
+
+    .gh-toc-header {
+        background: none;
+        cursor: default;
+        padding: 0 0 0.5rem 0;
+    }
+
+    .gh-toc-toggle {
+        display: none;
+    }
+
+    .gh-toc-wrapper .gh-toc {
+        max-height: none;
+        overflow: visible;
+        padding: 0;
+    }
+}
+
 /* === Ghost Card Overrides (Dark Mode) === */
 .kg-bookmark-container {
     border-color: var(--bg-secondary) !important;

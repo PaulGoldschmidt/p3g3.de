@@ -45,7 +45,8 @@
     "gulp-zip": "6.1.0",
     "postcss": "8.5.6",
     "postcss-easy-import": "4.0.0",
-    "pump": "3.0.3"
+    "pump": "3.0.3",
+    "tocbot": "^4.36.4"
   },
   "browserslist": [
     "defaults"
@@ -85,6 +86,11 @@
         "group": "post"
       },
       "show_related_posts": {
+        "type": "boolean",
+        "default": true,
+        "group": "post"
+      },
+      "show_toc": {
         "type": "boolean",
         "default": true,
         "group": "post"

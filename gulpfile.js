@@ -64,7 +64,7 @@ function css(done) {
 
 function js(done) {
     pump([
-        src(['assets/js/*.js'], {sourcemaps: true}),
+        src(['node_modules/tocbot/dist/tocbot.js', 'assets/js/*.js'], {sourcemaps: true}),
         concat('main.js'),
         replaceVersion(),
         uglify(),
