@@ -1190,36 +1190,17 @@ h1:target, h2:target, h3:target {
     align-items: center;
     gap: 6px;
     background: none;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 8px;
-    padding: 6px 10px;
+    border: none;
+    padding: 6px;
     color: var(--text-tertiary);
     font-family: "Geist Sans", system-ui, sans-serif;
     font-size: 0.8rem;
     cursor: pointer;
-    transition: color 0.15s, border-color 0.15s;
+    transition: color 0.15s;
 }
 
 .cmd-palette-trigger:hover {
     color: var(--text-primary);
-    border-color: rgba(255, 255, 255, 0.16);
-}
-
-.cmd-palette-trigger kbd {
-    font-family: inherit;
-    font-size: 0.7rem;
-    padding: 1px 5px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-}
-
-.gh-head .cmd-palette-trigger {
-    border: none;
-    padding: 6px;
-}
-
-.gh-head .cmd-palette-trigger kbd {
-    display: none;
 }
 
 [data-theme="light"] .cmd-palette-backdrop {
@@ -1295,5 +1276,9 @@ h1:target, h2:target, h3:target {
         width: 95vw;
         max-height: 60vh;
         max-height: 60dvh;
+    }
+
+    .cmd-palette-footer {
+        display: none;
     }
 }
