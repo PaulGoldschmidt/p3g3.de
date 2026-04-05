@@ -617,7 +617,7 @@ img {
 .gh-content {
     --main: min(var(--content-max-width), 100%);
     --wide: minmax(0, calc((1200px - var(--content-max-width)) / 2));
-    --full: minmax(1.5rem, 1fr);
+    --full: minmax(0, 1fr);
 
     display: grid;
     grid-template-columns:
