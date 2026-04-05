@@ -1,4 +1,4 @@
-# My Personal Blog 📝
+# My Personal Blog :memo:
 
 Over the years, I had mutliple, often cringy websites which I was not fully happy with. After this started really bugging me, I decided to create a fresh blog look and infrastructure starting from scratch. You can find the deployed version of this repo both at the German Blog [p3g3.de](https://p3g3.de) and the translated blog at [blog.paul-goldschmidt.de](https://blog.paul-goldschmidt.de).
 
@@ -18,13 +18,13 @@ The Website relies in its core on the Ghost 6.0 open-source CMS optimized for bl
 While migrating away from Wordpress, I wanted to maintain previous links from WP (format YYYY/MM/{posttitle}) to be rerouted to the Ghost CMS Scheme of just the {posttitle}. For this porpuse, I build a quick script to convert these links. You can find this script on [GitHub Gist](https://gist.github.com/PaulGoldschmidt/6635384c410108e1ab80ac9feaa060a9).
 
 
-## Development Commands
+## Development Commands :octocat:
 
-- `npm run dev`        # Gulp watch with LiveReload (development)
-- `npm run build`      # Compile CSS (PostCSS) and JS (concat+uglify) to assets/built/
-- `npm run zip`        # Create goldschmidt-blog.zip for manual upload
-- `npm test`           # Validate theme with gscan
-- `npm run test:ci`    # Strict gscan validation (CI)
+- `npm run dev` — gulp watch with LiveReload (development)
+- `npm run build` — compile CSS (PostCSS) and JS (concat+uglify) to assets/built/
+- `npm run zip` — create goldschmidt-blog.zip for manual upload
+- `npm test` — validate theme with gscan
+- `npm run test:ci` — strict gscan validation (CI)
 
 ## License
 This project is licensed under the MIT License. See [Licenses](https://github.com/StanfordBDHG/SwiftPackageTemplate/tree/main/LICENSES) for more information.
