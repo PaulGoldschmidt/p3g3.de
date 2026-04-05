@@ -1,7 +1,7 @@
 {
   "name": "goldschmidt-blog",
   "description": "Minimal, dark-mode first blog theme for Ghost 6",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "engines": {
     "ghost": ">=5.0.0"
   },
