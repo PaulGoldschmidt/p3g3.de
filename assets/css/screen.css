@@ -212,6 +212,12 @@ img {
     gap: 1.5rem;
 }
 
+.gh-head-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 .gh-head-brand {
     display: flex;
     align-items: center;
