@@ -9,15 +9,16 @@
         </div>
 
         <nav class="gh-head-menu">
-            {{#if @custom.portfolio_url}}
-                <span class="nav-item"><a class="gh-head-portfolio" href="{{@custom.portfolio_url}}">{{t "Back to portfolio"}}</a></span>
-            {{/if}}
+            <a href="/">Home</a>
             {{#foreach navigation}}
                 <span class="nav-item"><a href="{{url}}">{{label}}</a></span>
             {{/foreach}}
             {{#foreach secondary_navigation}}
                 <span class="nav-item"><a href="{{url}}">{{label}}</a></span>
             {{/foreach}}
+            {{#if @custom.portfolio_url}}
+                <span class="nav-item"><a class="gh-head-portfolio" href="{{@custom.portfolio_url}}">{{t "My Homepage"}}</a></span>
+            {{/if}}
             <span class="nav-item"><a href="https://paul-goldschmidt.de/imprint">{{t "Imprint"}}</a></span>
             <span class="nav-item"><a href="https://paul-goldschmidt.de/privacy-policy">{{t "Privacy Policy"}}</a></span>
         </nav>
