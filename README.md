@@ -1,8 +1,8 @@
-# My Personal Blog
+# My Personal Blog 📝
 
 Over the years, I had mutliple, often cringy websites which I was not fully happy with. After this started really bugging me, I decided to create a fresh blog look and infrastructure starting from scratch. You can find the deployed version of this repo both at the German Blog [p3g3.de](https://p3g3.de) and the translated blog at [blog.paul-goldschmidt.de](https://blog.paul-goldschmidt.de).
 
-The closely related parent repository [PaulGoldschmidt/paul-goldschmidt.de](https://github.com/PaulGoldschmidt/p3g3.de) is the design source for this Repository, implementing the design for my [mainsite](https://paul-goldschmidt.de) in the highly optimized JavaScript Framework [Astro](https://astro.build/).
+The closely related parent repository [PaulGoldschmidt/paul-goldschmidt.de](https://github.com/PaulGoldschmidt/paul-goldschmidt.de) is the design source for this Repository, implementing the design for my [mainsite](https://paul-goldschmidt.de) in the highly optimized JavaScript Framework [Astro](https://astro.build/).
 
 ## Features
 
