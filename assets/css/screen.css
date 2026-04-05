@@ -1328,12 +1328,16 @@ button.cmd-palette-trigger {
     gap: 6px;
     background: none;
     border: none;
-    padding: 6px;
-    color: var(--text-tertiary);
+    padding: 0.25rem;
+    color: var(--text-primary);
     font-family: "Geist Sans", system-ui, sans-serif;
     font-size: 0.8rem;
     cursor: pointer;
     transition: color 0.15s;
+}
+
+button.cmd-palette-trigger svg {
+    display: block;
 }
 
 button.cmd-palette-trigger:hover {
