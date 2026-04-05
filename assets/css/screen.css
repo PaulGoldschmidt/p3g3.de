@@ -343,13 +343,13 @@ img {
     .gh-head.is-open .gh-head-menu {
         display: flex;
         flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--bg);
+        align-items: flex-start;
+        gap: 0.5rem;
+        position: relative;
+        background: var(--bg-secondary);
         padding: 1rem 1.5rem;
-        border-bottom: 1px solid var(--bg-secondary);
+        margin-top: 1rem;
+        border-radius: 8px;
         z-index: 99;
     }
 
@@ -357,8 +357,12 @@ img {
         content: none;
     }
 
-    .gh-head {
-        position: relative;
+    .gh-head.is-open .gh-head-inner {
+        flex-wrap: wrap;
+    }
+
+    .gh-head.is-open .gh-head-menu {
+        width: 100%;
     }
 }
 
