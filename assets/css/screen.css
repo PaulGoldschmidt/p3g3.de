@@ -364,7 +364,7 @@ img {
 
 .gh-feed-title {
     padding: 2rem 0 1rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 600;
     color: var(--text-primary);
 }
@@ -1185,7 +1185,7 @@ h1:target, h2:target, h3:target {
     margin-right: 2px;
 }
 
-.cmd-palette-trigger {
+button.cmd-palette-trigger {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -1199,7 +1199,7 @@ h1:target, h2:target, h3:target {
     transition: color 0.15s;
 }
 
-.cmd-palette-trigger:hover {
+button.cmd-palette-trigger:hover {
     color: var(--text-primary);
 }
 
