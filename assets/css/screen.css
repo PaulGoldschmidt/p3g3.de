@@ -319,6 +319,8 @@ img {
 /* Mobile hamburger */
 .gh-burger {
     display: none;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     background: none;
     border: none;
@@ -327,6 +329,7 @@ img {
 }
 
 .gh-burger svg {
+    display: block;
     width: 24px;
     height: 24px;
 }
@@ -337,7 +340,7 @@ img {
     }
 
     .gh-burger {
-        display: block;
+        display: flex;
     }
 
     .gh-head.is-open .gh-head-menu {
