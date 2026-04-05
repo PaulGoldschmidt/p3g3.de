@@ -11,5 +11,12 @@
     "Page {page} of {totalPages}": "Page {page} of {totalPages}",
     "Read more": "Read more",
     "Subscribe": "Subscribe",
-    "Toggle menu": "Toggle menu"
+    "Toggle menu": "Toggle menu",
+    "Command palette": "Command palette",
+    "Type a command or search...": "Type a command or search...",
+    "No results": "No results",
+    "navigate": "navigate",
+    "select": "select",
+    "close": "close",
+    "Open command palette": "Open command palette"
 }

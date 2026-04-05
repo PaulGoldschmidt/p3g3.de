@@ -18,6 +18,8 @@
         updateThemeWord();
     }
 
+    window.__toggleTheme = toggleTheme;
+
     if (btn) {
         updateThemeWord();
         btn.addEventListener("click", toggleTheme);

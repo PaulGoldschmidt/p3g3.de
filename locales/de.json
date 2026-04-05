@@ -11,5 +11,12 @@
     "Page {page} of {totalPages}": "Seite {page} von {totalPages}",
     "Read more": "Weiterlesen",
     "Subscribe": "Abonnieren",
-    "Toggle menu": "Menü umschalten"
+    "Toggle menu": "Menü umschalten",
+    "Command palette": "Befehlspalette",
+    "Type a command or search...": "Befehl oder Suche eingeben...",
+    "No results": "Keine Ergebnisse",
+    "navigate": "navigieren",
+    "select": "auswählen",
+    "close": "schließen",
+    "Open command palette": "Befehlspalette öffnen"
 }
